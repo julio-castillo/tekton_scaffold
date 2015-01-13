@@ -8,10 +8,11 @@ Gem::Specification.new do |spec|
   spec.version       = TektonScaffold::VERSION
   spec.authors       = ["Julio Castillo"]
   spec.email         = ["julio.castillo@tektonlabs.com"]
-  spec.summary       = %q{Admin interface generator.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = "Admin interface generator."
+  spec.description   = "Admin interface generator."
   spec.homepage      = ""
   spec.license       = "MIT"
+  spec.authors     = ['Julio Castillo']
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
