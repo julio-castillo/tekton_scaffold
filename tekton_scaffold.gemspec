@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = TektonScaffold::VERSION
   spec.authors       = ["Julio Castillo"]
   spec.email         = ["julio.castillo@tektonlabs.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
+  spec.summary       = %q{Admin interface generator.}
   spec.description   = %q{TODO: Write a longer description. Optional.}
   spec.homepage      = ""
   spec.license       = "MIT"
