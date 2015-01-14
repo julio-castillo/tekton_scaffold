@@ -1,0 +1,11 @@
+<legend><h1><%%= title @<%= instance_name %> %></h1></legend>
+
+<%%= render partial: "layouts/alert_messages" %>
+
+<div id="table" class="row">
+	<div class="col-md-12">
+		<%%= render partial: "form" %>
+	</div>
+</div>
+
+<%%= disabled_info 'form_<%= instance_name %>' %>

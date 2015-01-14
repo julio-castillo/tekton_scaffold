@@ -1,0 +1,32 @@
+<div id="accordion">
+	<%%= link_to t('search.filter_search'), "#", data: {toggle: "collapse", parent: "#accordion"}, href: "#collapse" %>
+	<div id="collapse" class="accordion-body collapse">
+		<div class="accordion-inner">
+			<%%= search_form_for @q, url: <%= items_path %>, remote: true, method: "get", id: "form_search", class: "form-inline", role: "form" do |f| %>
+				<fieldset>
+					<%- for attribute in model_attributes -%>
+						<div class="form-group">
+							<%%= f.label :<%= attribute.name %>, class: "col-lg-3 control-label" %>
+							<div class="col-lg-9">
+								<%if attribute.name.to_s.eql? "deleted"%>
+									<dd><%%= f.check_box :<%=attribute.name%>_eq %></dd>
+								<%elsif attribute.type.to_s.eql? "string"%>
+									<%%= f.text_field :<%= attribute.name %>_cont, class: "form-control" %>
+								<%elsif attribute.type.to_s=="date"%>
+									<%%= f.text_field :<%= attribute.name %>_eq, class: "form-control datepicker" %>
+								<%else%>
+									<%%= f.text_field :<%= attribute.name %>_eq, class: "form-control" %>
+								<%end%>
+							</div>
+						</div>
+					<% end %>
+					<div class="form-group">
+						<div class="col-lg-9 col-lg-3">
+							<%%= f.submit "#{t('actions.search')}", disable_with: "#{t('button_disabled.searching')}", class: "btn btn-default" %>
+						</div>
+					</div>
+				</fieldset>
+			<%% end %>
+		</div>
+	</div>
+</div>

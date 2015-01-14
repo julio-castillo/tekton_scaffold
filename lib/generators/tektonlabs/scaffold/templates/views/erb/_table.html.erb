@@ -1,0 +1,35 @@
+<%% if @<%=instances_name%>_list.size > 0 %>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+					<%- for attribute in model_attributes -%>
+						<th><%%=t('.<%= attribute.name %>')%></th>
+					<%- end -%>
+					<th><%%=t('table.actions')%></th>
+			</tr>
+		</thead>
+		<tbody>
+			<%% for <%= instance_name %> in @<%= instances_name %>_list %>
+				<tr>
+					<%- for attribute in model_attributes -%>
+						<td><%%= <%= instance_name %>.<%= attribute.name %> %></td>
+					<%- end -%>
+					<td class="btn-rud">
+						<%%= link_to '<i class="glyphicon glyphicon-search"></i>'.html_safe, <%= item_path %>(<%= instance_name %>), class: "btn btn-default btn-show", data: {toggle: "tooltip"}, title: "#{t('actions.show')}" unless current_admin_user.has_access?(<%= ids['show'] %>) %>
+						<%%= link_to '<i class="glyphicon glyphicon-pencil"></i>'.html_safe, edit_<%= item_path %>(<%= instance_name %>), class: "btn btn-default btn-edit", data: {toggle: "tooltip"}, title: "#{t('actions.edit')}" unless current_admin_user.has_access?(<%= ids['edit'] %>) %>
+						<%%= link_to '<i class="glyphicon glyphicon-remove"></i>'.html_safe, {action: 'destroy', id: <%= instance_name %>}, {method: "delete", class: "btn btn-default btn-remove", data: {toggle: "tooltip", confirm: t('actions.sure_to_delete') + " " + <%= instance_name %> + "?"}, title: "#{t('actions.delete')}"} unless current_admin_user.has_access?(<%= ids['destroy'] %>) %>
+					</td>
+				</tr>
+			<%% end %>
+		</tbody>
+	</table>
+	<%%= actions_tooltip %>
+	<div class="tablefooter clearfix">
+		<div class="pagination">
+			<%%= will_paginate @<%=instances_name%>_list %>
+			<%%= paginate_ajax_js%>
+		</div>
+	</div>
+<%%else%>
+	<p><%%= t('messages.#{instances_name}.noitem_found') %></p>
+<%%end%>

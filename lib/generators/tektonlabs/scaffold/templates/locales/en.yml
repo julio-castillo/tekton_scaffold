@@ -1,0 +1,29 @@
+#encoding: utf-8
+<%str_namespace = plural_name.split('/')[0]%>
+<%str_controller = plural_name.split('/')[1]%>
+en:
+  <%= "#{str_namespace}:" unless str_namespace.blank? %>
+    <%= "#{str_controller}:" unless str_controller.blank? %>
+      index:
+        title: '<%= class_name.pluralize %> List'
+        new_button: 'New <%= class_name %>'
+      new:
+        title: 'New <%= class_name %>'
+      edit:
+        title: 'Edit <%= class_name %>'
+      table:
+        name: 'Name'
+      search:
+        name: 'Name'   
+        deleted: 'Deleted?'    
+        all_status: 'All'
+      form:
+        gral_info: 'General info'
+      messages:
+        noitem_found: "No <%= class_name %> found"
+  activerecord:
+    attributes:
+      <%= class_name.downcase %>:
+<%- for attribute in model_attributes -%>
+        <%= attribute.name %>: '<%= attribute.name %>'
+<% end %>

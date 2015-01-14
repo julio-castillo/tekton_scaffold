@@ -1,0 +1,10 @@
+<%%case @int_page_type %>
+	<%% when 0 %>
+  		<%%= submit_tag(t('buttons.register'), disable_with: t('button_disabled.saving'), class: "btn btn-default")%>          
+	<%% when 1 %>
+		<%%= link_to t('buttons.enable_edition'), edit_<%= item_path %>(@<%= instance_name %>), class: "btn btn-default" unless current_admin_user.has_access?(<%= ids["edit"] %>) %>
+	<%%else%>
+  		<%%= submit_tag(t('buttons.edit'), disable_with: t('button_disabled.saving'), class: "btn btn-default") %>
+  		<%%= submit_tag(t('buttons.undo_changes'), type: "reset", class: "btn btn-default") %>
+<%%end%>
+<%%= link_to t('buttons.cancel'), <%= items_path %>, class: "btn btn-default"%>

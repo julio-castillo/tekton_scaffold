@@ -1,0 +1,20 @@
+<legend class="title_border"><h1><%%= title t('.title') %></h1></legend>
+
+<%%= render partial: "layouts/alert_messages" %>
+
+<div class="pull-right">
+	<%%= link_to  t('.new_button'), <%= item_path action: :new %>, class: "btn btn-default" unless current_admin_user.has_access?(<%= ids["new"] %>) %>
+</div>
+
+<div id="search" class="row">
+	<div class="col-md-12">
+		<%%= render partial: "search" %>
+	</div>
+</div>
+
+<div class="row">
+	<div id="table" class="col-md-12">
+		<%%= render partial: "table" %>
+	</div>
+</div>
+

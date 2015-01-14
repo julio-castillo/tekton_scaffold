@@ -1,0 +1,11 @@
+<legend class="title_border"><h1><%%= title "#{t('.title')} #{@<%= instance_name %>}" %></h1></legend>
+
+<%%= render partial: "layouts/alert_messages" %>
+
+<div id="table" class="row">
+	<div class="col-md-12">
+		<%%= render partial: "form" %>
+	</div>
+</div>
+
+<%%= render partial: "layouts/validation", locals: {form_id: 'form_<%= instance_name %>'} %>

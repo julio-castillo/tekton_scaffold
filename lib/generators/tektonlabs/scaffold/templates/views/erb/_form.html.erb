@@ -1,0 +1,44 @@
+<%% str_method = @int_page_type == 2 ? 'put' : 'post'%>
+<%% str_path = @int_page_type == 2 ? <%= item_path %> : <%= items_path %> %>
+
+<%%= form_for(@<%= instance_name %>, url: str_path, method: str_method, html: {id: "form_<%= instance_name %>", class: "form-horizontal", role: "form"}) do |f| %>             
+  <fieldset>
+    <legend><%%= t('.gral_info') %></legend>
+    <%- for attribute in model_attributes -%>
+      <div class="form-group">
+        <%%= set_label_obligatory(<%= class_name %>.null?('<%= attribute.name %>')) %>
+        <%%= f.label :<%= attribute.name %>, class: "col-lg-2 control-label" %>
+        <div class="col-lg-8">
+          <%if attribute.name.to_s.include?("email")%>
+            <%%= f.email_field :<%= attribute.name %>, class: "form-control validate[#{set_validate(<%= class_name %>.null?("<%= attribute.name %>"))}]" %>
+          <%elsif attribute.name.to_s.include?("password")%>
+            <%%= f.password_field :<%= attribute.name %>, class: "form-control validate[#{set_validate(<%= class_name %>.null?("<%= attribute.name %>"))}]" %>
+          <%elsif attribute.type.to_s == "string"%>
+            <%%= f.text_field :<%= attribute.name %>, class: "form-control validate[#{set_validate(<%= class_name %>.null?("<%= attribute.name %>"))}]" %>
+          <%elsif attribute.type.to_s == "text"%>
+            <%%= f.text_area :<%= attribute.name %>, class: "form-control validate[#{set_validate(<%= class_name %>.null?("<%= attribute.name %>"))}]" %>
+          <%elsif attribute.type.to_s == "boolean"%>
+            <div class="checkbox">
+              <%%= f.check_box :<%= attribute.name %>, class: "validate[#{set_validate(<%= class_name %>.null?("<%= attribute.name %>"))}]" %>
+            </div>
+          <%elsif ["integer","float","decimal"].include?(attribute.type.to_s)%>
+            <%%= f.number_field :<%= attribute.name %>, class: "form-control validate[#{set_validate(<%= class_name %>.null?("<%= attribute.name %>"))}]" %>
+          <%elsif attribute.type.to_s == "date"%>
+            <%%= f.text_field :<%= attribute.name %>, class: "form-control validate[#{set_validate(<%= class_name %>.null?("<%= attribute.name %>"))}]", "data-provide" => "datepicker" %>
+          <%elsif attribute.type.to_s == "time"%>
+            <%%= f.text_field :<%= attribute.name %>, class: "form-control validate[#{set_validate(<%= class_name %>.null?("<%= attribute.name %>"))}]", "data-provide" => "datepicker" %>
+            <%elsif attribute.type.to_s == "datetime"%>
+            <%%= f.text_field :<%= attribute.name %>, class: "form-control validate[#{set_validate(<%= class_name %>.null?("<%= attribute.name %>"))}]", "data-provide" => "datepicker" %>
+          <%else%>
+            <%%= f.<%= attribute.field_type %> :<%= attribute.name %>, class: "form-control validate[#{set_validate(<%= class_name %>.null?("<%= attribute.name %>"))}]" %>
+          <%end%>
+        </div>
+      </div>
+    <%end%>
+    <div class="form-group">
+      <div class="col-lg-offset-2 col-lg-8">
+        <%%= render partial: "buttons" %>
+      </div>
+    </div>
+  </fieldset>
+<%% end %>

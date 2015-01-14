@@ -1,0 +1,29 @@
+#encoding: utf-8
+<%str_namespace = plural_name.split('/')[0]%>
+<%str_controller = plural_name.split('/')[1]%>
+es:
+  <%= "#{str_namespace}:" unless str_namespace.blank? %>
+    <%= "#{str_controller}:" unless str_controller.blank? %>
+      index:
+        title: 'Listado de <%= class_name.pluralize %>'
+        new_button: 'Nuevo <%= class_name %>'
+      new:
+        title: 'Nuevo <%= class_name %>'
+      edit:
+        title: 'Editar <%= class_name %>'
+      table:
+        name: 'Nombre'
+      search:
+        name: 'Nombre'   
+        deleted: 'Eliminado?'    
+        all_status: 'Todos'
+      form:
+        gral_info: 'Información General'
+      messages:
+        noitem_found: "Ningún <%= class_name %> encontrado"
+  activerecord:
+    attributes:
+      <%= class_name.downcase %>:
+<%- for attribute in model_attributes -%>
+        <%= attribute.name %>: '<%= attribute.name %>'
+<% end %>
